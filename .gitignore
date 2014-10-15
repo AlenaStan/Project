@@ -26,3 +26,7 @@ proguard/
 *.log
 TaskMannager/HelloWorld/.idea/
 TaskMannager/.idea/
+LaunchMode/.idea/
+ListView/.idea/vcs.xml
+ResultInStart/.idea/
+ListView/.idea/

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.github.alenastan.taskmannager" >
+    package="com.github.alenastan.launchmode" >
 
     <application
         android:allowBackup="true"
@@ -23,13 +23,10 @@
             android:label="@string/title_main_activity"
             android:launchMode="singleTask"
             />
-
         <activity
             android:name=".SampleActivity"
             android:label="@string/title_sample_activity"
             android:parentActivityName=".MainActivity"
-            android:launchMode="singleInstance"
-
             />
     </application>
 
