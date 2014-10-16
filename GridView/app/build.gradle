@@ -5,7 +5,7 @@ android {
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "com.github.alenastan.taskmannager"
+        applicationId "com.github.alenastan.gridview"
         minSdkVersion 17
         targetSdkVersion 20
         versionCode 1
@@ -21,6 +21,4 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:20.+'
-
 }
