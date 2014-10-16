@@ -16,10 +16,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         List<Items> items = new ArrayList<Items>();
-        items.add(new Items ("Значение #1", 22));
-        items.add(new Items ("Значение #2", 66));
-        items.add(new Items("Значение #3", 89));
-        items.add(new Items ("Значение #4", 77));
+        items.add(new Items ("Значение #1", 28));
+        items.add(new Items ("Значение #2", 60));
+        items.add(new Items("Значение #3", 90));
+        items.add(new Items ("Значение #4", 57));
 
         gridView = (GridView) findViewById(R.id.gridView);
         gridView.setAdapter(new Adapter( this,items ));
