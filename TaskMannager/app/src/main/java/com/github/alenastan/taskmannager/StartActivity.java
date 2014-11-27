@@ -8,7 +8,7 @@ import com.github.alenastan.taskmannager.utils.AuthUtils;
 /**
  * Created by lena on 11.10.2014.
  */
-public class StartActivity extends ActionBarActivity{
+public class StartActivity extends ActionBarActivity {
 
     public static final int REQUEST_LOGIN = 0;
 
