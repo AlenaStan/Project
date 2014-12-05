@@ -24,9 +24,33 @@ proguard/
 
 # Log Files
 *.log
+*.iml
 TaskMannager/HelloWorld/.idea/
 TaskMannager/.idea/
 LaunchMode/.idea/
 ListView/.idea/vcs.xml
 ResultInStart/.idea/
 ListView/.idea/
+VkClient/.idea/
+.gradle
+/gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/json_sample
+.idea
+gradlew
+gradlew.bat
+
+
+
+
+
+
+
+
+
+
+
