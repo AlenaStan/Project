@@ -21,6 +21,7 @@ import com.github.alenastan.vkclient.bo.NoteGsonModel;
 import com.github.alenastan.vkclient.helper.DataManager;
 import com.github.alenastan.vkclient.processing.BitmapProcessor;
 import com.github.alenastan.vkclient.processing.FriendArrayProcessor;
+import com.github.alenastan.vkclient.source.CachedHttpDataSource;
 import com.github.alenastan.vkclient.source.HttpDataSource;
 import com.github.alenastan.vkclient.source.VkDataSource;
 
@@ -133,7 +134,7 @@ public class MainActivity extends ActionBarActivity implements DataManager.Callb
 
                             }
 
-                        }, url, HttpDataSource.get(MainActivity.this), new BitmapProcessor());
+                        }, url, CachedHttpDataSource.get(MainActivity.this), new BitmapProcessor());
                     }
                     return convertView;
                 }

@@ -3,6 +3,7 @@ package com.github.alenastan.vkclient;
 import android.app.Application;
 import android.content.Context;
 
+import com.github.alenastan.vkclient.source.CachedHttpDataSource;
 import com.github.alenastan.vkclient.source.HttpDataSource;
 import com.github.alenastan.vkclient.source.VkDataSource;
 
@@ -12,6 +13,7 @@ import com.github.alenastan.vkclient.source.VkDataSource;
 public class CoreApplication extends Application {
 
     private HttpDataSource mHttpDataSource;
+    private CachedHttpDataSource mCachedHttpDataSource;
     private VkDataSource mVkDataSource;
 
     @Override
@@ -19,6 +21,7 @@ public class CoreApplication extends Application {
         super.onCreate();
         mHttpDataSource = new HttpDataSource();
         mVkDataSource = new VkDataSource();
+        mCachedHttpDataSource = new CachedHttpDataSource(this);
     }
 
     @Override
@@ -29,6 +32,13 @@ public class CoreApplication extends Application {
                 mHttpDataSource = new HttpDataSource();
             }
             return mHttpDataSource;
+        }
+        if (CachedHttpDataSource.KEY.equals(name)) {
+            //for android kitkat +
+            if (mCachedHttpDataSource == null) {
+                mCachedHttpDataSource = new CachedHttpDataSource(this);
+            }
+            return mCachedHttpDataSource;
         }
         if (VkDataSource.KEY.equals(name)) {
             //for android kitkat +
