@@ -141,6 +141,7 @@ public class MainActivity extends ActionBarActivity implements DataManager.Callb
 
             };
             listView.setAdapter(mAdapter);
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

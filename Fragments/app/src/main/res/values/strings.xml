@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Fragments</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="empty">Нет данных</string>
+    <string name="mscreen_text">Main screen</string>
+    <string name="friendlist_text">Friends</string>
+    <string name="messcreen_text">Messages</string>
+    <string name="newsscreen_text">News</string>
+    <string name="fragment_friend">Friends</string>
+
+    <!-- sync prefs -->
+    <string name="sync_every_min">Every minutes</string>
+    <string name="sync_every_ten_min">Every 10 minutes</string>
+    <string name="sync_every_hour">Every hour</string>
+    <string name="sync_every_day">Every day</string>
+    <string name="general_settings">General settings</string>
+
+    <string name="summary_settings">Summary settings</string>
+    <string name="sync">Sync</string>
+
+    <string name="key_account_sync">KEY_ACCOUNT_SYNC</string>
+    <string name="auto_sync">Auto sync</string>
+    <string name="auto_sync_summary">Allow auto sync data</string>
+    <string name="auto_sync_interval">Auto sync interval</string>
+    <string name="sync_friends">Sync friends</string>
+    <string name="friends">Friends</string>
+    <string name="messages">Messages</string>
+    <string name="sync_messages">Sync messages</string>
+
+    <string name="key_sync">KEY_SYNC</string>
+    <string name="key_auto_sync">KEY_AUTO_SYNC</string>
+    <string name="key_auto_sync_interval">KEY_AUTO_SYNC_INTERVAL</string>
+    <string name="key_sync_friends">KEY_SYNC_FRIENDS</string>
+    <string name="key_sync_messages">KEY_SYNC_MESSAGES</string>
+
+    <string name="dialog_title_no_internet">No internet</string>
+    <string name="dialog_message_no_internet">Check you network connections and try again</string>
+    <string name="dialog_message_error_authorization">Need authorize in VK before continue work.</string>
+    <string name="dialog_title_error_authorization">Authorization needed</string>
+    <string name="dialog_message_cancel_select_account">For continue work need select account.</string>
+    <string name="dialog_title_cancel_select_account">Select account error</string>
+
+    <string name="content_description_profile_image">profile image</string>
+    <string name="birth_date">BIRTH DATE</string>
+    <string name="home_town">HOMETOWN</string>
+    <string name="relationship_status">RELATIONSHIP STATUS</string>
+    <string name="relatives">RELATIVES</string>
+    <string name="contacts">CONTACTS</string>
+    <string name="city">CITY</string>
+    <string name="education">EDUCATION</string>
+    <string name="school">SCHOOL</string>
+    <string name="beliefs">BELIEFS</string>
+    <string name="no_connection">No connection</string>
+    <string name="retry">RETRY</string>
+
+    <!-- relations -->
+    <string name="relation_single">single</string>
+    <string name="relation_in_relationship">in relationship</string>
+    <string name="relation_betrothed">betrothed</string>
+    <string name="relation_married">married</string>
+    <string name="relation_complicated">it\'s complicated</string>
+    <string name="relation_actively_searching">actively searching</string>
+    <string name="relation_in_love">in love</string>
+
+    <!-- sex -->
+    <string name="sex_none">not set</string>
+    <string name="sex_female">female</string>
+    <string name="sex_male">male</string>
+</resources>
