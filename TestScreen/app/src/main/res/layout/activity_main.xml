@@ -1,0 +1,33 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/user_profile_background">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/user_profile_background"
+        android:padding="@dimen/user_profile_main_padding">
+
+
+        <include
+            layout="@layout/profile_view_more"
+            android:id="@+id/profile_view_more"/>
+
+
+        <include
+        layout="@layout/userprofile_head"
+        android:id="@+id/userprofile_head"/>
+
+
+        <include
+            layout="@layout/wall_poste"
+            android:id="@+id/wall_poste"/>
+        <include
+            layout="@layout/wall_content"
+            android:id="@+id/wall_content"/>
+
+
+    </RelativeLayout>
+</ScrollView>

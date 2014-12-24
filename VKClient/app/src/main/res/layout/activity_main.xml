@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Ничего нет!!!"
+        android:text="Empty"
         android:visibility="gone" />
 
 
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="БабАХ!!!"
+        android:text="Error"
         android:visibility="gone" />
 
     <ProgressBar

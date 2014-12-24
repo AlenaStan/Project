@@ -1,0 +1,16 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="default_padding">12dp</dimen>
+    <dimen name="main_photo_size">100dp</dimen>
+    <dimen name="user_profile_head_padding">4dp</dimen>
+    <dimen name="user_profile_main_padding">8dp</dimen>
+    <dimen name="user_profile_ex_size">30dp</dimen>
+    <dimen name="text_size_default">20sp</dimen>
+    <dimen name="view_more_text_size_default">15sp</dimen>
+    <dimen name="default_padding_half">6dp</dimen>
+    <dimen name="ic_poste_image_size">60dp</dimen>
+    <dimen name="ic_poste_image_width">75dp</dimen>
+    <dimen name="ic_poste_image_height">45dp</dimen>
+</resources>

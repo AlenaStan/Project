@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/userprofile_head"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/main_photo_size"
+    android:padding="@dimen/user_profile_head_padding"
+    android:clickable="true"
+    android:background="@drawable/user_profile_background">
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/user_profile_image"
+        android:layout_width="@dimen/main_photo_size"
+        android:layout_height="@dimen/main_photo_size"
+        android:src="@drawable/ic_profile"
+        android:contentDescription="@string/content_description_profile_image"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/user_profile_arrow_button"
+        android:scaleType="centerCrop"
+        android:layout_width="@dimen/user_profile_ex_size"
+        android:layout_height="@dimen/user_profile_ex_size"
+        android:src="@drawable/ic_arrow_button"
+        android:contentDescription="@string/content_description_profile_image"/>
+
+    <TextView
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/user_profile_image"
+        android:layout_toEndOf="@id/user_profile_image"
+        android:layout_toStartOf="@id/user_profile_arrow_button"
+        android:layout_toLeftOf="@id/user_profile_arrow_button"
+        android:paddingLeft="@dimen/default_padding"
+        android:paddingRight="@dimen/default_padding"
+        android:id="@+id/user_profile_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/default_user_name"
+        android:singleLine="true"
+        android:textColor="@color/user_profile_name"
+        android:textSize="@dimen/text_size_default"/>
+
+    <TextView
+        android:layout_below="@id/user_profile_name"
+        android:layout_toRightOf="@id/user_profile_image"
+        android:layout_toEndOf="@id/user_profile_image"
+        android:layout_toStartOf="@id/user_profile_arrow_button"
+        android:layout_toLeftOf="@id/user_profile_arrow_button"
+        android:paddingLeft="@dimen/default_padding"
+        android:paddingRight="@dimen/default_padding"
+        android:id="@+id/user_profile_online_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/default_user_online_status"
+        android:singleLine="true"
+        android:background="@drawable/user_profile_background"
+        android:textSize="@dimen/text_size_default"
+        android:textColor="@color/user_profile_text_online_status"
+        />
+
+    <TextView
+        android:layout_below="@id/user_profile_online_status"
+        android:layout_toRightOf="@id/user_profile_image"
+        android:layout_toEndOf="@id/user_profile_image"
+        android:layout_toStartOf="@id/user_profile_arrow_button"
+        android:layout_toLeftOf="@id/user_profile_arrow_button"
+        android:paddingLeft="@dimen/default_padding"
+        android:paddingRight="@dimen/default_padding"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/profile_user_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/template_user_status"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:textColor="@color/user_profile_text_status"
+        android:background="@drawable/user_profile_background"/>
+
+</RelativeLayout>
