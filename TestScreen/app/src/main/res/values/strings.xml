@@ -13,4 +13,19 @@
     <string name="country">страна</string>
     <string name="default_country">Беларусь</string>
     <string name="wall_poste_button_text">написать на стене</string>
+    <string-array name="screen_array">
+        <item>Profile</item>
+        <item>Friends</item>
+        <item>Wall</item>
+        <item>News</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_search">Search</string>
+    <string name="screen_one">Screen one</string>
+    <string name="page">Page:</string>
+    <string name="screen_three">Screen three</string>
+    <string name="template_user_name">Alena Stanchyts</string>
+    <string name="template_user_online_status">online</string>
+    <string name="title_vk_login_activity">Login</string>
 </resources>

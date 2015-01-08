@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="user_profile_background">#F4F4F4</color>
-    <color name="user_profile_background_onclick">#B4B4A5</color>
-    <color name="user_profile_name">@android:color/black</color>
-    <color name="user_profile_text_online_status">#bebfc0</color>
-    <color name="user_profile_text_status">#D8D8D9</color>
-    <color name="user_profile_text_status_full">@android:color/black</color>
-    <color name="profile_view_more_background">#C4C4C3</color>
-    <color name="user_profile_text_caption">#696969</color>
-    <color name="user_profile_text_info">@android:color/black</color>
-    <color name="wall_poste_button_color">#C4C4C3</color>
+
+    <color name="primary">#00BCD4</color>
+    <color name="primary_dark">#0097A7</color>
+    <color name="primary_light">#B2EBF2</color>
+    <color name="accent">#03A9F4</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+
+
 </resources>
