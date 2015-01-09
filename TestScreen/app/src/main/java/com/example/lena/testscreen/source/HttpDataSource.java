@@ -2,7 +2,7 @@ package com.example.lena.testscreen.source;
 
 import android.content.Context;
 
-import com.example.lena.testscreen.CoreApplication;
+import com.example.lena.testscreen.VkAppCore;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -17,7 +17,7 @@ public class HttpDataSource implements DataSource<InputStream, String> {
     public static final String KEY = "HttpDataSource";
 
     public static HttpDataSource get(Context context) {
-        return CoreApplication.get(context, KEY);
+        return VkAppCore.get(context, KEY);
     }
 
     @Override

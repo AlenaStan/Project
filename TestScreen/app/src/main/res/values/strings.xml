@@ -28,4 +28,10 @@
     <string name="template_user_name">Alena Stanchyts</string>
     <string name="template_user_online_status">online</string>
     <string name="title_vk_login_activity">Login</string>
+    <string name="title_friends_activity">Friends</string>
+    <string-array name="drawer_array">
+         <item>Friends</item>
+        <item>Wall</item>
+        <item>News</item>
+    </string-array>
 </resources>

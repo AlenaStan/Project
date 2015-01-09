@@ -3,7 +3,7 @@ package com.example.lena.testscreen.source;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.lena.testscreen.CoreApplication;
+import com.example.lena.testscreen.VkAppCore;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +28,7 @@ public class CachedHttpDataSource extends HttpDataSource{
     }
 
     public static CachedHttpDataSource get(Context context) {
-        return CoreApplication.get(context, KEY);
+        return VkAppCore.get(context, KEY);
     }
 
     @Override

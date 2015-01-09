@@ -1,12 +1,11 @@
-package com.example.lena.testscreen.entity;
+package com.example.lena.testscreen.bo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.json.JSONObject;
-
 /**
- * Created by lena on 08.01.2015.
+ * Created by lena on 09.01.2015.
  */
 public class Friend extends JSONObjectWrapper {
 

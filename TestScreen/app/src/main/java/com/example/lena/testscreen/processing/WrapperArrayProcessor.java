@@ -1,6 +1,6 @@
-package com.example.lena.testscreen.process;
+package com.example.lena.testscreen.processing;
 
-import com.example.lena.testscreen.entity.JSONObjectWrapper;
+import com.example.lena.testscreen.bo.JSONObjectWrapper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

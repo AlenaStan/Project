@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
-import com.example.lena.testscreen.entity.NoteGsonModel;
+import com.example.lena.testscreen.bo.NoteGsonModel;
 
 /**
  * Created by lena on 26.11.2014.

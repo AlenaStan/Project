@@ -9,18 +9,18 @@ import android.view.ViewGroup;
 import com.example.lena.testscreen.R;
 
 /**
- * Created by lena on 30.12.2014.
+ * Created by lena on 08.01.2015.
  */
-public class ScreenThree extends Fragment {
+public class NewsFragment extends Fragment {
 
-    public ScreenThree() {
+    public NewsFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.screen_three, container,
+        View rootView = inflater.inflate(R.layout.fragment_news, container,
                 false);
 
         return rootView;

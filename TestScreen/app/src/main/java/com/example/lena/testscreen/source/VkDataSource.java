@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import com.example.lena.testscreen.Api;
-import com.example.lena.testscreen.CoreApplication;
+import com.example.lena.testscreen.VkAppCore;
 import com.example.lena.testscreen.oauth.VkOAuthHelper;
 
 import java.io.InputStream;
@@ -18,7 +18,7 @@ public class VkDataSource extends HttpDataSource {
     public static final String KEY = "VkDataSource";
 
     public static VkDataSource get(Context context) {
-        return CoreApplication.get(context, KEY);
+        return VkAppCore.get(context, KEY);
     }
 
     @Override

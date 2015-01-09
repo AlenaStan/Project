@@ -1,7 +1,8 @@
-package com.example.lena.testscreen.process;
+package com.example.lena.testscreen.processing;
 
-import com.example.lena.testscreen.entity.Friend;
+import com.example.lena.testscreen.bo.Friend;
 
+import android.content.ContentValues;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

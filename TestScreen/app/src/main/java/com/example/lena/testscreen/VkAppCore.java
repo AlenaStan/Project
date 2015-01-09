@@ -8,10 +8,9 @@ import com.example.lena.testscreen.source.HttpDataSource;
 import com.example.lena.testscreen.source.VkDataSource;
 
 /**
- * Created by lena on 26.11.2014.
+ * Created by lena on 08.01.2015.
  */
-public class CoreApplication extends Application {
-
+public class VkAppCore extends Application {
     private HttpDataSource mHttpDataSource;
     private CachedHttpDataSource mCachedHttpDataSource;
     private VkDataSource mVkDataSource;

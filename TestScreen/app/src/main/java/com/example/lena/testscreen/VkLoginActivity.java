@@ -2,6 +2,7 @@ package com.example.lena.testscreen;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 
 import com.example.lena.testscreen.oauth.VkOAuthHelper;
 
@@ -42,7 +44,8 @@ public void onError(Exception e) {
         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                setResult(RESULT_CANCELED);
+                Intent intent = getIntent();
+                setResult(RESULT_CANCELED,intent);
                 finish();
             }
         })
@@ -51,8 +54,10 @@ public void onError(Exception e) {
         }
 
 @Override
-public void onSuccess() {
-        setResult(RESULT_OK);
+public void onSuccess(String mToken) {
+        Intent intent = getIntent();
+        intent.putExtra(VkOAuthHelper.ACCESS_TOKEN, mToken);
+        setResult(RESULT_OK,intent);
         finish();
         }
 
@@ -71,9 +76,6 @@ private class VkWebViewClient extends WebViewClient {
 
 
 
-    /* (non-Javadoc)
-     * @see android.webkit.WebViewClient#shouldOverrideUrlLoading(android.webkit.WebView, java.lang.String)
-     */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         Log.d(TAG, "overr " + url);
@@ -82,7 +84,6 @@ private class VkWebViewClient extends WebViewClient {
             view.setVisibility(View.INVISIBLE);
             return true;
         } else {
-            //view.loadUrl(url);
             return false;
         }
     }
@@ -91,7 +92,6 @@ private class VkWebViewClient extends WebViewClient {
     public void onReceivedError(WebView view, int errorCode,
                                 String description, String failingUrl) {
         super.onReceivedError(view, errorCode, description, failingUrl);
-        //showProgress("Error: " + description);
         view.setVisibility(View.VISIBLE);
         dismissProgress();
         Log.d(TAG, "error " + failingUrl);
@@ -101,17 +101,9 @@ private class VkWebViewClient extends WebViewClient {
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
         Log.d(TAG, "finish " + url);
-         /*   if (url.contains("&amp;")) {
-                url = url.replace("&amp;", "&");
-                Log.d(TAG, "overr after replace " + url);
-                view.loadUrl(url);
-                return;
-            }*/
         view.setVisibility(View.VISIBLE);
-        //if (!VkOAuthHelper.proceedRedirectURL(VkLoginActivity.this, url, success)) {
         dismissProgress();
-        //}
-    }
+      }
 
 }
 

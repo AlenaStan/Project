@@ -3,7 +3,7 @@ package com.example.lena.testscreen.helper;
 import android.os.Handler;
 
 import com.example.lena.testscreen.os.AsyncTask;
-import com.example.lena.testscreen.process.Processor;
+import com.example.lena.testscreen.processing.Processor;
 import com.example.lena.testscreen.source.DataSource;
 
 /**

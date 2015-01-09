@@ -7,27 +7,26 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.lena.testscreen.R;
 import com.example.lena.testscreen.view.SlidingTabLayout;
 
 /**
- * Created by lena on 30.12.2014.
+ * Created by lena on 08.01.2015.
  */
-public class ScreenTwo extends Fragment {
+public class WallFragment extends Fragment {
 
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager mViewPager;
 
-    public ScreenTwo() {
+    public WallFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.screen_two, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_wall, container, false);
 
         return rootView;
     }
@@ -52,7 +51,7 @@ public class ScreenTwo extends Fragment {
          */
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         /**

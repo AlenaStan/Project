@@ -1,5 +1,6 @@
 package com.example.lena.testscreen;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -16,14 +17,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.lena.testscreen.fragments.ScreenOne;
-import com.example.lena.testscreen.fragments.ScreenThree;
-import com.example.lena.testscreen.fragments.ScreenTwo;
+import com.example.lena.testscreen.fragments.FriendsFragment;
+import com.example.lena.testscreen.fragments.NewsFragment;
+import com.example.lena.testscreen.fragments.ProfileFragment;
+import com.example.lena.testscreen.fragments.WallFragment;
+import com.example.lena.testscreen.oauth.VkOAuthHelper;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private String[] mScreenTitles;
+    private String[] mDrawerTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -39,10 +43,9 @@ public class MainActivity extends ActionBarActivity {
 
     mTitle = mDrawerTitle = getTitle();
     mScreenTitles = getResources().getStringArray(R.array.screen_array);
+    mDrawerTitles = getResources().getStringArray(R.array.drawer_array);
     mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        headerDrawer = View.inflate(this, R.layout.view_header, null);
-
+    headerDrawer = View.inflate(this, R.layout.view_header, null);
     mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         /////////////////////////////////
@@ -52,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
         ////////////////////////////////
     // Set the adapter for the list view
     mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-    R.layout.drawer_list_item, mScreenTitles));
+    R.layout.drawer_list_item, mDrawerTitles));
     // Set the list's click listener
     mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -139,13 +142,16 @@ mDrawerLayout.setDrawerListener(mDrawerToggle);
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new ScreenOne();
+                fragment = new ProfileFragment();
                 break;
             case 1:
-                fragment = new ScreenTwo();
+                startFriendsActivity();
                 break;
             case 2:
-                fragment = new ScreenThree();
+                fragment = new WallFragment();
+                break;
+            case 3:
+                fragment = new NewsFragment();
                 break;
             default:
                 break;
@@ -190,6 +196,10 @@ mDrawerLayout.setDrawerListener(mDrawerToggle);
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+    private void startFriendsActivity() {
+        startActivity(new Intent(this, FriendsActivity.class));
+        finish();
     }
 
 }

@@ -9,18 +9,18 @@ import android.view.ViewGroup;
 import com.example.lena.testscreen.R;
 
 /**
- * Created by lena on 30.12.2014.
+ * Created by lena on 08.01.2015.
  */
-public class ScreenOne extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    public ScreenOne() {
+    public ProfileFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.screen_first, container,
+        View rootView = inflater.inflate(R.layout.fragment_profile, container,
                 false);
 
         return rootView;
