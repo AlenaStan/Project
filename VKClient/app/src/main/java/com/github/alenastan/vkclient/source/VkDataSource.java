@@ -6,12 +6,12 @@ import android.text.TextUtils;
 
 import com.github.alenastan.vkclient.Api;
 import com.github.alenastan.vkclient.CoreApplication;
-import com.github.alenastan.vkclient.auth.VkOAuthHelper;
+import com.github.alenastan.vkclient.oauth.VkOAuthHelper;
 
 import java.io.InputStream;
 
 /**
- * Created by lena on 26.11.2014.
+ * Created by lena on 14.01.2015.
  */
 public class VkDataSource extends HttpDataSource {
 

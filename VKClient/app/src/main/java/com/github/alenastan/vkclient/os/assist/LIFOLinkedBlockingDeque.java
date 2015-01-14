@@ -1,6 +1,5 @@
 package com.github.alenastan.vkclient.os.assist;
 
-
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**

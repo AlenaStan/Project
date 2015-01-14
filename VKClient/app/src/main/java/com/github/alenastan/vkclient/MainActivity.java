@@ -1,172 +1,201 @@
 package com.github.alenastan.vkclient;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Build;
+import android.content.res.Configuration;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.Toast;
 
-import com.github.alenastan.vkclient.bo.Friend;
-import com.github.alenastan.vkclient.bo.NoteGsonModel;
-import com.github.alenastan.vkclient.helper.DataManager;
-import com.github.alenastan.vkclient.processing.BitmapProcessor;
-import com.github.alenastan.vkclient.processing.FriendArrayProcessor;
-import com.github.alenastan.vkclient.source.CachedHttpDataSource;
-import com.github.alenastan.vkclient.source.HttpDataSource;
-import com.github.alenastan.vkclient.source.VkDataSource;
+import com.github.alenastan.vkclient.fragments.FriendsFragment;
+import com.github.alenastan.vkclient.fragments.NewsFragment;
+import com.github.alenastan.vkclient.fragments.ProfileFragment;
+import com.github.alenastan.vkclient.fragments.WallFragment;
 
-import java.util.List;
 
-public class MainActivity extends ActionBarActivity implements DataManager.Callback<List<Friend>> {
+public class MainActivity extends ActionBarActivity {
 
-    public static final int LOADER_ID = 0;
+    private String[] mScreenTitles;
+    private String[] mDrawerTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mDrawerTitle;
+    private CharSequence mTitle;
 
-    private ArrayAdapter mAdapter;
-
-    private FriendArrayProcessor mFriendArrayProcessor = new FriendArrayProcessor();
-
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private View headerDrawer;
 
     @Override
-    protected void onCreate(Bundle pSavedInstanceState) {
-        super.onCreate(pSavedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
-        final HttpDataSource dataSource = getHttpDataSource();
-        final FriendArrayProcessor processor = getProcessor();
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                update(dataSource, processor);
+
+        mTitle = mDrawerTitle = getTitle();
+        mScreenTitles = getResources().getStringArray(R.array.screen_array);
+        mDrawerTitles = getResources().getStringArray(R.array.drawer_array);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        headerDrawer = View.inflate(this, R.layout.view_header, null);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        /////////////////////////////////
+
+        mDrawerList.setHeaderDividersEnabled(true);
+        mDrawerList.addHeaderView(headerDrawer);
+        ////////////////////////////////
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, mDrawerTitles));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(
+                this, /* host Activity */
+                mDrawerLayout, /* DrawerLayout object */
+                R.string.drawer_open,
+                R.string.drawer_close
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                getSupportActionBar().setTitle(mTitle);
+                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
-        });
-        update(dataSource, processor);
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                getSupportActionBar().setTitle(mDrawerTitle);
+                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+// Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        // Initialize the first fragment when the application first loads.
+        if (savedInstanceState == null) {
+            selectItem(0);
+        }
+
     }
 
-    private FriendArrayProcessor getProcessor() {
-        return mFriendArrayProcessor;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
-    private HttpDataSource getHttpDataSource() {
-        return VkDataSource.get(MainActivity.this);
-    }
 
-    private void update(HttpDataSource dataSource, FriendArrayProcessor processor) {
-        DataManager.loadData(MainActivity.this,
-                getUrl(),
-                dataSource,
-                processor);
-    }
-
-    private String getUrl() {
-        return Api.FRIENDS_GET;
+    /* Called whenever we call invalidateOptionsMenu() */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        menu.findItem(R.id.action_search).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
-    public void onDataLoadStart() {
-        if (!mSwipeRefreshLayout.isRefreshing()) {
-            findViewById(android.R.id.progress).setVisibility(View.VISIBLE);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
         }
-        findViewById(android.R.id.empty).setVisibility(View.GONE);
+        // Handle action buttons
+        switch(item.getItemId()) {
+            case R.id.action_search:
+                // Show toast about click.
+                Toast.makeText(this, R.string.action_search, Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
-    private List<Friend> mData;
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    @Override
-    public void onDone(List<Friend> data) {
-        if (mSwipeRefreshLayout.isRefreshing()) {
-            mSwipeRefreshLayout.setRefreshing(false);
+    /* The click listener for ListView in the navigation drawer */
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
         }
-        findViewById(android.R.id.progress).setVisibility(View.GONE);
-        if (data == null || data.isEmpty()) {
-            findViewById(android.R.id.empty).setVisibility(View.VISIBLE);
+    }
+
+    /** Swaps fragments in the main content view */
+    private void selectItem(int position) {
+        // Update the main content by replacing fragments
+        Fragment fragment = null;
+        switch (position) {
+            case 0:
+                fragment = new ProfileFragment();
+                break;
+            case 1:
+                fragment = new FriendsFragment();
+                break;
+            case 2:
+                fragment = new WallFragment();
+                break;
+            case 3:
+                fragment = new NewsFragment();
+                break;
+            default:
+                break;
         }
-        AdapterView listView = (AbsListView) findViewById(android.R.id.list);
-        if (mAdapter == null) {
-            mData = data;
-            mAdapter = new ArrayAdapter<Friend>(this, R.layout.adapter_item, android.R.id.text1, data) {
 
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    if (convertView == null) {
-                        convertView = View.inflate(MainActivity.this, R.layout.adapter_item, null);
-                    }
-                    Friend item = getItem(position);
-                    TextView textView1 = (TextView) convertView.findViewById(android.R.id.text1);
-                    textView1.setText(item.getName());
-                    TextView textView2 = (TextView) convertView.findViewById(android.R.id.text2);
-                    textView2.setText(item.getNickname());
-                    convertView.setTag(item.getId());
-                    final ImageView imageView = (ImageView) convertView.findViewById(android.R.id.icon);
-                    final String url = item.getPhoto();
-                    imageView.setImageBitmap(null);
-                    imageView.setTag(url);
-                    if (!TextUtils.isEmpty(url)) {
-                        //TODO add delay and cancel old request or create limited queue
-                        //TODO create sync Map to check existing request and existing callbacks
-                        //TODO create separate thread pool for manager
-                        DataManager.loadData(new DataManager.Callback<Bitmap>() {
-                            @Override
-                            public void onDataLoadStart() {
+        // Insert the fragment by replacing any existing fragment
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment).commit();
 
-                            }
-
-                            @Override
-                            public void onDone(Bitmap bitmap) {
-                                if (url.equals(imageView.getTag())) {
-                                    imageView.setImageBitmap(bitmap);
-                                }
-                            }
-
-                            @Override
-                            public void onError(Exception e) {
-
-                            }
-
-                        }, url, CachedHttpDataSource.get(MainActivity.this), new BitmapProcessor());
-                    }
-                    return convertView;
-                }
-
-            };
-            listView.setAdapter(mAdapter);
-
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-                    Friend item = (Friend) mAdapter.getItem(position);
-                    NoteGsonModel note = new NoteGsonModel(item.getId(), item.getFirstName(), item.getLastName());
-                    intent.putExtra("item", note);
-                    startActivity(intent);
-                }
-            });
+            // Highlight the selected item, update the title, and close the drawer
+            mDrawerList.setItemChecked(position, true);
+            setTitle(mScreenTitles[position]);
+            mDrawerLayout.closeDrawer(mDrawerList);
         } else {
-            mData.clear();
-            mData.addAll(data);
-            mAdapter.notifyDataSetChanged();
+            // Error
+            Log.e(this.getClass().getName(), "Error. Fragment is not created");
         }
     }
 
     @Override
-    public void onError(Exception e) {
-        e.printStackTrace();
-        findViewById(android.R.id.progress).setVisibility(View.GONE);
-        findViewById(android.R.id.empty).setVisibility(View.GONE);
-        TextView errorView = (TextView) findViewById(R.id.error);
-        errorView.setVisibility(View.VISIBLE);
-        errorView.setText(errorView.getText() + "\n" + e.getMessage());
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getSupportActionBar().setTitle(mTitle);
     }
+
+    /**
+     * When using the ActionBarDrawerToggle, you must call it during
+     * onPostCreate() and onConfigurationChanged()...
+     */
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
 
 }

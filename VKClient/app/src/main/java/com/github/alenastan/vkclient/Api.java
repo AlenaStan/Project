@@ -1,7 +1,7 @@
 package com.github.alenastan.vkclient;
 
 /**
- * Created by lena on 26.11.2014.
+ * Created by lena on 14.01.2015.
  */
 public class Api {
     public static final String BASE_PATH = "https://api.vk.com/method/";

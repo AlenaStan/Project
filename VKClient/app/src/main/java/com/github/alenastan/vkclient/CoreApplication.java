@@ -8,10 +8,9 @@ import com.github.alenastan.vkclient.source.HttpDataSource;
 import com.github.alenastan.vkclient.source.VkDataSource;
 
 /**
- * Created by lena on 26.11.2014.
+ * Created by lena on 14.01.2015.
  */
 public class CoreApplication extends Application {
-
     private HttpDataSource mHttpDataSource;
     private CachedHttpDataSource mCachedHttpDataSource;
     private VkDataSource mVkDataSource;

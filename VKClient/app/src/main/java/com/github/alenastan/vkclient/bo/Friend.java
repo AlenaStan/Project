@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import org.json.JSONObject;
 
 /**
- * Created by lena on 26.11.2014.
+ * Created by lena on 09.01.2015.
  */
 public class Friend extends JSONObjectWrapper {
 

@@ -3,7 +3,7 @@ package com.github.alenastan.vkclient.bo;
 import java.io.Serializable;
 
 /**
- * Created by lena on 26.11.2014.
+ * Created by lena on 09.01.2015.
  */
 public class NoteGsonModel implements Serializable {
 

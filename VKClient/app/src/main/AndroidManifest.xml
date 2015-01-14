@@ -23,21 +23,13 @@
         <activity
             android:name=".VkLoginActivity"
             android:label="@string/title_vk_login_activity"/>
-
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_main_activity"
-            android:launchMode="singleTask"
+            android:label="@string/app_name"
             />
-
         <activity
             android:name=".DetailsActivity"
-            android:label="@string/title_details_activity"
-            android:parentActivityName=".MainActivity"
-            />
-        <provider
-            android:authorities="com.github.alenastan.providers.FriendsPicker"
-            android:name=".MyContentProvider"
+            android:label="@string/title_detail"
             />
 
     </application>

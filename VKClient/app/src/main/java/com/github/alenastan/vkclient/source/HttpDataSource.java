@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * Created by lena on 26.11.2014.
+ * Created by lena on 14.01.2015.
  */
 public class HttpDataSource implements DataSource<InputStream, String> {
 

@@ -1,14 +1,15 @@
 package com.github.alenastan.vkclient.os;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import android.os.Handler;
 
 import com.github.alenastan.vkclient.os.assist.LIFOLinkedBlockingDeque;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 /**
- * Created by lena on 26.11.2014.
+ * Created by lena on 14.01.2015.
  */
 public abstract class AsyncTask<Params, Progress, Result> {
 
