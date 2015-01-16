@@ -1,8 +1,11 @@
 package com.github.alenastan.vkclient.fragments;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
@@ -13,6 +16,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.alenastan.vkclient.Api;
@@ -40,16 +44,22 @@ public class FriendsFragment extends Fragment implements DataManager.Callback<Li
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ArrayAdapter mAdapter;
     private FriendArrayProcessor mFriendArrayProcessor = new FriendArrayProcessor();
+    AbsListView mListView;
+    TextView mError;
+    private TextView mEmpty;
+    private ProgressBar mProgressBar;
 
 
-    public FriendsFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_friends, container,false);
-
+        mSwipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_container);
+        mListView = (AbsListView)root.findViewById(android.R.id.list);
+        mProgressBar =(ProgressBar) root.findViewById(android.R.id.progress);
+        mEmpty = (TextView)root.findViewById(android.R.id.empty);
+        mError = (TextView)root.findViewById(R.id.error);
         return root;
 
     }
@@ -58,7 +68,11 @@ public class FriendsFragment extends Fragment implements DataManager.Callback<Li
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_container);
+        // }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
         final HttpDataSource dataSource = getHttpDataSource();
         final FriendArrayProcessor processor = getProcessor();
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -68,7 +82,8 @@ public class FriendsFragment extends Fragment implements DataManager.Callback<Li
                 update(dataSource, processor);
             }
 
-        }); update(dataSource, processor);
+        });
+        update(dataSource, processor);
 
 
     }
@@ -77,10 +92,10 @@ public class FriendsFragment extends Fragment implements DataManager.Callback<Li
     }
 
     private HttpDataSource getHttpDataSource() {
-        return VkDataSource.get(getActivity());
+        return new VkDataSource();
     }
     private void update(HttpDataSource dataSource, FriendArrayProcessor processor) {
-        DataManager.loadData(FriendsFragment.this,
+        DataManager.loadData(this,
                 getUrl(),
                 dataSource,
                 processor);
@@ -93,33 +108,33 @@ public class FriendsFragment extends Fragment implements DataManager.Callback<Li
     @Override
     public void onDataLoadStart() {
         if (!mSwipeRefreshLayout.isRefreshing()) {
-            getActivity().findViewById(android.R.id.progress).setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.VISIBLE);
         }
-        getActivity().findViewById(android.R.id.empty).setVisibility(View.GONE);
+        mEmpty.setVisibility(View.GONE);
     }
 
 
     private List<Friend> mData;
 
-
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onDone(List<Friend> data) {
         if (mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);
         }
-        getActivity().findViewById(android.R.id.progress).setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
         if (data == null || data.isEmpty()) {
-            getActivity().findViewById(android.R.id.empty).setVisibility(View.VISIBLE);
+            mEmpty.setVisibility(View.VISIBLE);
         }
-        AdapterView listView = (AbsListView) getActivity().findViewById(android.R.id.list);
+
         if (mAdapter == null) {
             mData = data;
-            mAdapter = new ArrayAdapter<Friend>(getActivity(), R.layout.adapter_item, android.R.id.text1, data) {
+            mAdapter = new ArrayAdapter<Friend>(getActivity().getApplicationContext(), R.layout.adapter_item, android.R.id.text1, data) {
 
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
                     if (convertView == null) {
-                        convertView = View.inflate(getContext(), R.layout.adapter_item, null);
+                        convertView = View.inflate(getActivity().getApplicationContext(), R.layout.adapter_item, null);
                     }
                     Friend item = getItem(position);
                     TextView textView1 = (TextView) convertView.findViewById(android.R.id.text1);
@@ -151,19 +166,19 @@ public class FriendsFragment extends Fragment implements DataManager.Callback<Li
 
                             }
 
-                        }, url, CachedHttpDataSource.get(getContext()), new BitmapProcessor());
+                        }, url, CachedHttpDataSource.get(getActivity().getApplicationContext()), new BitmapProcessor());
                     }
                     return convertView;
                 }
 
             };
-            listView.setAdapter(mAdapter);
+            mListView.setAdapter(mAdapter);
 
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                    Intent intent = new Intent(getActivity().getApplicationContext(), DetailsActivity.class);
                     Friend item = (Friend) mAdapter.getItem(position);
                     NoteGsonModel note = new NoteGsonModel(item.getId(), item.getFirstName(), item.getLastName());
                     intent.putExtra("item", note);
@@ -180,43 +195,12 @@ public class FriendsFragment extends Fragment implements DataManager.Callback<Li
     @Override
     public void onError(Exception e) {
         e.printStackTrace();
-        getActivity().findViewById(android.R.id.progress).setVisibility(View.GONE);
-        getActivity().findViewById(android.R.id.empty).setVisibility(View.GONE);
-        TextView errorView = (TextView) getActivity().findViewById(R.id.error);
-        errorView.setVisibility(View.VISIBLE);
-        errorView.setText(errorView.getText() + "\n" + e.getMessage());
+        mProgressBar.setVisibility(View.GONE);
+        mEmpty.setVisibility(View.GONE);
+        mError.findViewById(R.id.error);
+        mError.setVisibility(View.VISIBLE);
+        mError.setText(mError.getText() + "\n" + e.getMessage());
     }
-
-//        AdapterView listView = (AbsListView) getActivity().findViewById(android.R.id.list);
-//        mAdapter = new ArrayAdapter<String>(getActivity(),R.layout.adapter_item, android.R.id.text1, Friends.NAMES);
-//
-//
-//
-//        setListAdapter(mAdapter);
-//
-//
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//           @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getActivity(),
-//                        "Click ListItem Number " + position , Toast.LENGTH_LONG)
-//                        .show();
-//                         showDetails(position);
-//
-//
-//            }
-//        });
-//
-//    }
-//    void showDetails(int index) {
-//        getListView().setItemChecked(index, true);
-//        Intent intent = new Intent();
-//        intent.setClass(getActivity(), DetailActivity.class);
-//        intent.putExtra("index", index);
-//        startActivity(intent);
-//    }
-
 
 
 }
