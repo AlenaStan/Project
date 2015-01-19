@@ -87,6 +87,7 @@ public class FragmentFriends extends Fragment implements DataManager.Callback<Li
     private HttpDataSource getHttpDataSource() {
         return new VkDataSource();
     }
+
     private void update(HttpDataSource dataSource, FriendArrayProcessor processor) {
         DataManager.loadData(this,
                 getUrl(),
@@ -151,7 +152,7 @@ public class FragmentFriends extends Fragment implements DataManager.Callback<Li
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(getActivity().getApplicationContext(), DetailsActivity.class);
                     Friend item = (Friend) mAdapter.getItem(position);
-                    NoteGsonModel note = new NoteGsonModel(item.getId(), item.getFirstName(), item.getLastName());
+                    NoteGsonModel note = new NoteGsonModel(item.getId(), item.getFirstName(), item.getLastName(),item.getPhoto());
                     intent.putExtra("item", note);
                     startActivity(intent);
                 }

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.github.alenastan.vkclient.CoreApplication;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

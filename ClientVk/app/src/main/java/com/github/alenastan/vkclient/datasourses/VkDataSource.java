@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.github.alenastan.vkclient.Api;
 import com.github.alenastan.vkclient.CoreApplication;
+
 import com.github.alenastan.vkclient.oauth.VkOAuthHelper;
 
 import java.io.InputStream;

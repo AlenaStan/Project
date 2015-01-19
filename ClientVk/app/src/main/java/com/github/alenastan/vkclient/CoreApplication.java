@@ -8,9 +8,6 @@ import com.github.alenastan.vkclient.datasourses.HttpDataSource;
 import com.github.alenastan.vkclient.datasourses.VkDataSource;
 import com.github.alenastan.vkclient.image.ImageLoader;
 
-/**
- * Created by lena on 12.01.2015.
- */
 public class CoreApplication extends Application {
 
     private HttpDataSource mHttpDataSource;
