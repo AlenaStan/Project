@@ -10,15 +10,20 @@ import com.github.alenastan.vkclient.oauth.EncryptHelper;
 /**
  * Created by lena on 18.01.2015.
  */
+//TODO rename to some another name for example Session
 public class AccessToken {
 
     public static final String ACCESS_TOKEN = "access_token";
+
+    //TODO why this is static?
     private static String accessToken;
 
+    //TODO why this is static?
     public static String get(){
         return accessToken;
     }
 
+    //TODO why this method exists?
     public  String getAccessToken(Context ctx){
          return tokenFromSharedPreferences(ctx);
      }
@@ -46,7 +51,7 @@ public class AccessToken {
         try {
             accessToken = EncryptHelper.decrypt(context, sToken);
             return accessToken;
-            } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
