@@ -37,6 +37,7 @@ public class VkLoginActivity extends ActionBarActivity implements VkOAuthHelper.
 
     @Override
     public void onError(Exception e) {
+        //TODO will be crashed if activity already gone
         new AlertDialog.Builder(this)
                 .setTitle("Error")
                 .setMessage(e.getMessage())
