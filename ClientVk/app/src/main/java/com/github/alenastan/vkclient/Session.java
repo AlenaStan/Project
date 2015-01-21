@@ -10,27 +10,33 @@ import com.github.alenastan.vkclient.oauth.EncryptHelper;
 /**
  * Created by lena on 18.01.2015.
  */
-public class AccessToken {
+public class Session {
 
     public static final String ACCESS_TOKEN = "access_token";
-    private static String accessToken;
+    private static Session session;
+    protected static String token;
 
-    public static String get(){
-        return accessToken;
+    private Session () {
+
+    }
+    public  static Session start(){
+        if( session == null){
+            session = new Session();
+
+        }
+        return session;
     }
 
-    public  String getAccessToken(Context ctx){
-         return tokenFromSharedPreferences(ctx);
-     }
+    public static String getToken(){
+         return token;
+        }
 
-    public void saveToken(String token,Context ctx){
-        saveTokenToSharedPreferences(token,ctx);
-    }
 
-    private  static void saveTokenToSharedPreferences(String token,Context context) {
+    protected  void saveTokenToSharedPreferences(String s,Context context) {
+        token = s;
         String encToken = null;
         try {
-            encToken = EncryptHelper.encrypt(context, token);
+              encToken = EncryptHelper.encrypt(context,s);
             } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,14 +44,15 @@ public class AccessToken {
         SharedPreferences.Editor edit = prefs.edit();
         edit.putString(ACCESS_TOKEN, encToken);
         edit.commit();
+
     }
 
-    public static String tokenFromSharedPreferences(Context context) {
+    public static String getTokenFromSharedPreferences(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String sToken = prefs.getString(ACCESS_TOKEN,"");
         try {
-            accessToken = EncryptHelper.decrypt(context, sToken);
-            return accessToken;
+            sToken = EncryptHelper.decrypt(context, sToken);
+            return sToken;
             } catch (Exception e) {
             e.printStackTrace();
         }

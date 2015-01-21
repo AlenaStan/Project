@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.github.alenastan.vkclient.AccessToken;
+import com.github.alenastan.vkclient.Session;
 import org.apache.http.auth.AuthenticationException;
 
 /**
@@ -47,9 +47,9 @@ public class VkOAuthHelper {
     }
     public static String sign(String url) {
         if (url.contains("?")) {
-            return url + "&access_token="+ AccessToken.get();
+            return url + "&access_token="+ Session.getToken();
         } else {
-            return url + "?access_token="+ AccessToken.get();
+            return url + "?access_token="+ Session.getToken();
         }
     }
 }

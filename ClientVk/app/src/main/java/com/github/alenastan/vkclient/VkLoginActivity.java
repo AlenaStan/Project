@@ -54,7 +54,7 @@ public class VkLoginActivity extends ActionBarActivity implements VkOAuthHelper.
     @Override
     public void onSuccess(String accessToken) {
         Intent intent = getIntent();
-        intent.putExtra(AccessToken.ACCESS_TOKEN,accessToken);
+        intent.putExtra(Session.ACCESS_TOKEN,accessToken);
         setResult(RESULT_OK,intent);
         finish();
     }

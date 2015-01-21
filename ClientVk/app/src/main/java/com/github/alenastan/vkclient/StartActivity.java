@@ -10,13 +10,14 @@ import android.support.v7.app.ActionBarActivity;
  */
 public class StartActivity extends ActionBarActivity {
 
-    private AccessToken mAccessToken = new AccessToken();
-    public static final int REQUEST_LOGIN = 0;
+     public static final int REQUEST_LOGIN = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (mAccessToken.getAccessToken(this)== null) {
+        if (Session.getTokenFromSharedPreferences(this) == null) {
             startActivityForResult(new Intent(this, VkLoginActivity.class), REQUEST_LOGIN);
             } else {
             startMainActivity();
@@ -28,7 +29,8 @@ public class StartActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
-            mAccessToken.saveToken(data.getStringExtra(AccessToken.ACCESS_TOKEN),this);
+            Session mSession = Session.start();
+            mSession.saveTokenToSharedPreferences(data.getStringExtra(Session.ACCESS_TOKEN),this);
             startMainActivity();
         } else {
             finish();
