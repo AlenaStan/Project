@@ -19,7 +19,7 @@ public class Session {
     private Session () {
 
     }
-    public  static Session start(){
+    public  Session start(){
         if( session == null){
             session = new Session();
 
@@ -27,7 +27,7 @@ public class Session {
         return session;
     }
 
-    public static String getToken(){
+    public  String getToken(){
          return token;
         }
 
